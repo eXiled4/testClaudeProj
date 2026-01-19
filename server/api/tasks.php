@@ -65,6 +65,12 @@ try {
                 exit();
             }
             
+            if (empty($data['title'])) {
+                http_response_code(400);
+                echo json_encode(['error' => 'Title is required']);
+                exit();
+            }
+            
             $stmt = $db->prepare("UPDATE tasks SET title = ?, description = ?, status = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?");
             $stmt->execute([
                 $data['title'],
@@ -72,6 +78,12 @@ try {
                 $data['status'] ?? 'pending',
                 $id
             ]);
+            
+            if ($stmt->rowCount() === 0) {
+                http_response_code(404);
+                echo json_encode(['error' => 'Task not found']);
+                exit();
+            }
             
             $stmt = $db->prepare("SELECT * FROM tasks WHERE id = ?");
             $stmt->execute([$id]);

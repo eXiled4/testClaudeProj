@@ -26,22 +26,34 @@ function App() {
   }
 
   const handleTaskCreated = async (taskData) => {
-    await taskService.createTask(taskData)
-    await loadTasks()
+    try {
+      await taskService.createTask(taskData)
+      await loadTasks()
+    } catch (err) {
+      setError('Failed to create task: ' + err.message)
+    }
   }
 
   const handleTaskComplete = async (id) => {
-    const task = tasks.find(t => t.id === id)
-    if (task) {
-      await taskService.updateTask(id, { ...task, status: 'completed' })
-      await loadTasks()
+    try {
+      const task = tasks.find(t => t.id === id)
+      if (task) {
+        await taskService.updateTask(id, { ...task, status: 'completed' })
+        await loadTasks()
+      }
+    } catch (err) {
+      setError('Failed to complete task: ' + err.message)
     }
   }
 
   const handleTaskDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
-      await taskService.deleteTask(id)
-      await loadTasks()
+      try {
+        await taskService.deleteTask(id)
+        await loadTasks()
+      } catch (err) {
+        setError('Failed to delete task: ' + err.message)
+      }
     }
   }
 
