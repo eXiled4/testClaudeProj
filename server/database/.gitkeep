@@ -1,0 +1,2 @@
+# Keep the database directory but ignore the database files
+!.gitkeep
