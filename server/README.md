@@ -4,7 +4,7 @@ PHP backend API for the Test Task Manager application.
 
 ## Requirements
 
-- PHP 7.4 or higher
+- PHP 8.2 or higher
 - SQLite3 extension enabled
 
 ## Setup

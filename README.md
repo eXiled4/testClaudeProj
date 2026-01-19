@@ -34,7 +34,7 @@ testClaudeProj/
 - **Axios** - HTTP client for API requests
 
 ### Backend
-- **PHP 7.4+** - Server-side language
+- **PHP 8.2+** - Server-side language
 - **SQLite** - Lightweight database
 - **RESTful API** - API architecture
 
@@ -52,7 +52,7 @@ testClaudeProj/
 ### Prerequisites
 
 - Node.js 16 or higher
-- PHP 7.4 or higher with SQLite extension
+- PHP 8.2 or higher with SQLite extension
 - npm or yarn
 
 ### Installation & Running
