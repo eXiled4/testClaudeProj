@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 class Database {
-    private $db;
+    private PDO $db;
     
     public function __construct() {
         $dbPath = __DIR__ . '/../database/tasks.db';
@@ -16,7 +18,7 @@ class Database {
         }
     }
     
-    private function createTable() {
+    private function createTable(): void {
         $sql = "CREATE TABLE IF NOT EXISTS tasks (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
@@ -29,7 +31,7 @@ class Database {
         $this->db->exec($sql);
     }
     
-    public function getConnection() {
+    public function getConnection(): PDO {
         return $this->db;
     }
 }
