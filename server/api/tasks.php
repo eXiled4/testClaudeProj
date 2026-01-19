@@ -105,6 +105,12 @@ try {
             $stmt = $db->prepare("DELETE FROM tasks WHERE id = ?");
             $stmt->execute([$id]);
             
+            if ($stmt->rowCount() === 0) {
+                http_response_code(404);
+                echo json_encode(['error' => 'Task not found']);
+                exit();
+            }
+            
             echo json_encode(['message' => 'Task deleted successfully']);
             break;
             
@@ -115,5 +121,6 @@ try {
     }
 } catch (PDOException $e) {
     http_response_code(500);
-    echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+    error_log('Database error: ' . $e->getMessage());
+    echo json_encode(['error' => 'An error occurred while processing your request']);
 }

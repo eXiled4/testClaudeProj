@@ -11,7 +11,8 @@ class Database {
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->createTable();
         } catch (PDOException $e) {
-            die('Database connection failed: ' . $e->getMessage());
+            error_log('Database connection failed: ' . $e->getMessage());
+            die('Unable to connect to database');
         }
     }
     
